@@ -1,6 +1,7 @@
+import os
 import json
 from datetime import datetime
-from config import SCHEDULE_FILE, TODOS_FILE
+from config import SCHEDULE_FILE, TODOS_FILE, REMINDERS_FILE
 
 def get_todays_classes():
     with open(SCHEDULE_FILE) as f:
@@ -39,3 +40,31 @@ def remove_todo(task_name):
     kept = [t for t in todos if t["task"].lower() != task_name.lower()]
     _save_todos(kept)
     return len(kept) != len(todos)
+
+def _load_reminders():
+    if not os.path.exists(REMINDERS_FILE):
+        return []
+    with open(REMINDERS_FILE) as f:
+        return json.load(f)
+
+def _save_reminders(reminders):
+    with open(REMINDERS_FILE, "w") as f:
+        json.dump(reminders, f, indent=2)
+
+def add_reminder(task, when_str):
+    reminders = _load_reminders()
+    reminders.append({"task": task, "when": when_str, "sent": False})
+    _save_reminders(reminders)
+
+def pop_due_reminders():
+    """Returns reminder texts whose time has come, and marks them sent."""
+    now = datetime.now()
+    reminders = _load_reminders()
+    due = []
+    for r in reminders:
+        if not r["sent"] and datetime.strptime(r["when"], "%Y-%m-%d %H:%M") <= now:
+            r["sent"] = True
+            due.append(r["task"])
+    if due:
+        _save_reminders(reminders)
+    return due

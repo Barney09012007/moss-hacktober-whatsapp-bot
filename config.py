@@ -12,5 +12,6 @@ BOT_NAME=os.getenv("BOT_NAME")
 DATA_DIR=os.path.join(BASE_DIR,"data")
 SCHEDULE_FILE=os.path.join(DATA_DIR,"schedule.json")
 TODOS_FILE=os.path.join(DATA_DIR,"todos.json")
+REMINDERS_FILE = os.path.join(DATA_DIR, "reminders.json")
 
 SEND_TIME="7:30"

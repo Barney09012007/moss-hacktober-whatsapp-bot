@@ -45,6 +45,21 @@ def read_messages(driver):
         replies.append(text)
     return replies
 
+def read_messages_with_ids(driver):
+    """Returns (message_id, text) for messages not sent by the bot."""
+    elements = driver.find_elements(By.CSS_SELECTOR, MESSAGES)
+    out = []
+    for el in elements:
+        text = el.text.strip()
+        label = el.get_attribute("data-pre-plain-text") or ""
+        if not text or f"] {BOT_NAME}:" in label:
+            continue
+        msg_id = driver.execute_script(
+            "var p = arguments[0].closest('[data-id]');"
+            "return p ? p.getAttribute('data-id') : null;", el)
+        out.append((msg_id or label + text, text))
+    return out
+
 if __name__ == "__main__":
     driver = open_whatsapp()
     send_message(driver, "test: reply 'done' ")

@@ -1,7 +1,7 @@
-from data import get_open_todos, mark_todo_done, add_todo, remove_todo
+from datetime import datetime
+from data import get_open_todos, mark_todo_done, add_todo, remove_todo, add_reminder
 
 def apply_actions(actions):
-    """Runs the AI's suggested actions. Returns a list of result lines."""
     results = []
     open_tasks = {t["task"].lower(): t["task"] for t in get_open_todos()}
 
@@ -24,5 +24,17 @@ def apply_actions(actions):
                 results.append(f"Removed: {task}")
             else:
                 results.append(f"Couldn't find: {task}")
+        elif kind == "remind":
+            when = (a.get("time") or "").strip()
+            try:
+                dt = datetime.strptime(when, "%Y-%m-%d %H:%M")
+            except ValueError:
+                results.append(f"Couldn't understand the time for: {task}")
+                continue
+            if dt <= datetime.now():
+                results.append(f"That time has already passed: {task}")
+                continue
+            add_reminder(task, when)
+            results.append(f"Reminder set: {task} at {dt.strftime('%I:%M %p, %d %b')}")
 
     return results
