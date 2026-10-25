@@ -1,3 +1,6 @@
-2026/10/25-14:15:02.107 1422cc8 Reusing MANIFEST /Users/barney/whatsapp-reminder/chrome_profile/Default/Local Storage/leveldb/MANIFEST-000001
-2026/10/25-14:15:02.107 1422cc8 Recovering log #53
-2026/10/25-14:15:02.108 1422cc8 Reusing old log /Users/barney/whatsapp-reminder/chrome_profile/Default/Local Storage/leveldb/000053.log 
+2026/10/25-15:07:08.891 2b84 Reusing MANIFEST C:\Users\dylan\onedrive\desktop\projects\MOss-hackday\moss-hacktober-whatsapp-bot\chrome_profile\Default\Local Storage\leveldb/MANIFEST-000001
+2026/10/25-15:07:08.892 2b84 Recovering log #5
+2026/10/25-15:07:08.897 2b84 Reusing old log C:\Users\dylan\onedrive\desktop\projects\MOss-hackday\moss-hacktober-whatsapp-bot\chrome_profile\Default\Local Storage\leveldb/000005.log 
+2026/10/25-15:07:24.263 16b4 Level-0 table #9: started
+2026/10/25-15:07:24.272 16b4 Level-0 table #9: 13644 bytes OK
+2026/10/25-15:07:24.275 16b4 Delete type=0 #5

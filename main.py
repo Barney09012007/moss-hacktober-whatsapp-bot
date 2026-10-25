@@ -4,12 +4,14 @@ from config import SEND_TIME
 from whatsapp import open_whatsapp, send_message, read_messages_with_ids
 from ai import interpret_reply
 from actions import apply_actions
-from data import get_open_todos, pop_due_reminders
+from data import get_open_todos, get_due_reminders, mark_reminder_sent
 from message import build_morning_message
 
+
 def send_hm():
-    h, m = SEND_TIME.split(":")
-    return int(h), int(m)
+    t = datetime.strptime(SEND_TIME, "%H:%M")
+    return t.hour, t.minute
+
 
 def handle(driver, text):
     try:
@@ -26,10 +28,37 @@ def handle(driver, text):
     if lines:
         send_message(driver, "\n".join(lines))
 
+
+BURST_LIMIT = 5  # more new messages than this in one poll = chat history loading, not real messages
+
+
+def wait_for_history(driver, quiet_polls=3, max_wait=45):
+    """Wait until the chat has finished loading, i.e. the message list stops changing.
+
+    The message box appears before WhatsApp renders the history, so a fixed sleep
+    can snapshot a half-loaded chat and later treat old messages as new ones.
+    """
+    last = None
+    stable = 0
+    deadline = time.time() + max_wait
+    msgs = []
+    while time.time() < deadline:
+        msgs = read_messages_with_ids(driver)
+        ids = {mid for mid, _ in msgs}
+        if ids == last:
+            stable += 1
+            if stable >= quiet_polls:
+                break
+        else:
+            stable = 0
+            last = ids
+        time.sleep(1)
+    return msgs
+
+
 def main():
     driver = open_whatsapp()
-    time.sleep(3)
-    first = read_messages_with_ids(driver)
+    first = wait_for_history(driver)
     seen_ids = {mid for mid, _ in first}
     print(f"Listening. Ignoring {len(first)} old messages. Morning message at {SEND_TIME}.")
     if first:
@@ -41,15 +70,22 @@ def main():
 
     while True:
         try:
-            for mid, text in read_messages_with_ids(driver):
-                if mid in seen_ids:
-                    continue
+            new = [(mid, text) for mid, text in read_messages_with_ids(driver)
+                   if mid not in seen_ids]
+            if len(new) > BURST_LIMIT:
+                # looks like old history rendering late (or scrolled in), not real new messages
+                print(f"Skipping {len(new)} messages that appeared at once (assumed old history).")
+                seen_ids.update(mid for mid, _ in new)
+                new = []
+            for mid, text in new:
                 seen_ids.add(mid)
                 print("NEW:", text)
                 handle(driver, text)
 
-            for task in pop_due_reminders():
+            # mark a reminder sent only after the message actually went out
+            for idx, task in get_due_reminders():
                 send_message(driver, f"Reminder: {task}")
+                mark_reminder_sent(idx)
 
             now = datetime.now()
             if last_morning != now.date() and (now.hour, now.minute) >= send_hm():
@@ -58,6 +94,7 @@ def main():
         except Exception as e:
             print("Loop error:", e)
         time.sleep(3)
+
 
 if __name__ == "__main__":
     main()

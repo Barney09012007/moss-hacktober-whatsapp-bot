@@ -1,12 +1,27 @@
 from datetime import datetime
-from data import get_open_todos, mark_todo_done, add_todo, remove_todo, add_reminder
+from data import (get_open_todos, mark_todo_done, add_todo,
+                  remove_todo, add_reminder)
+
+
+def _open_map():
+    return {t["task"].lower(): t["task"] for t in get_open_todos()}
+
 
 def apply_actions(actions):
     results = []
-    open_tasks = {t["task"].lower(): t["task"] for t in get_open_todos()}
+    open_tasks = _open_map()
 
     for a in actions:
         kind = a.get("type")
+
+        if kind == "list":
+            todos = get_open_todos()
+            if todos:
+                results.append("Open tasks:\n" + "\n".join(f"- {t['task']}" for t in todos))
+            else:
+                results.append("Nothing open right now.")
+            continue
+
         task = (a.get("task") or "").strip()
         if not task:
             continue
@@ -36,5 +51,8 @@ def apply_actions(actions):
                 continue
             add_reminder(task, when)
             results.append(f"Reminder set: {task} at {dt.strftime('%I:%M %p, %d %b')}")
+
+        # keep the lookup fresh so "add X" then "done X" in one message works
+        open_tasks = _open_map()
 
     return results

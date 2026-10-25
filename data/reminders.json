@@ -3,5 +3,40 @@
     "task": "call Dylan",
     "when": "2026-10-25 14:13",
     "sent": true
+  },
+  {
+    "task": "wake up",
+    "when": "2026-10-25 15:03",
+    "sent": true
+  },
+  {
+    "task": "Wake up",
+    "when": "2026-10-26 13:57",
+    "sent": false
+  },
+  {
+    "task": "Wake up",
+    "when": "2026-10-26 07:00",
+    "sent": false
+  },
+  {
+    "task": "wake up",
+    "when": "2026-10-25 15:03",
+    "sent": true
+  },
+  {
+    "task": "Wake up",
+    "when": "2026-10-25 15:03",
+    "sent": true
+  },
+  {
+    "task": "wake up",
+    "when": "2026-10-25 15:07",
+    "sent": true
+  },
+  {
+    "task": "One more reminder",
+    "when": "2026-10-25 16:00",
+    "sent": false
   }
 ]
