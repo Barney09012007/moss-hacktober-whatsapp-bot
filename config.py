@@ -10,7 +10,7 @@ BOT_NAME=os.getenv("BOT_NAME")
 
 #data.py 
 DATA_DIR=os.path.join(BASE_DIR,"data")
-SCHD_DIR=os.path.join(DATA_DIR,"schd.json")
-TODOS_DIR=os.path.join(DATA_DIR,"todos.json")
+SCHEDULE_FILE=os.path.join(DATA_DIR,"schedule.json")
+TODOS_FILE=os.path.join(DATA_DIR,"todos.json")
 
 SEND_TIME="7:30"

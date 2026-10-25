@@ -1,0 +1,9 @@
+{
+  "monday": [{"subject": "Data Structures", "time": "09:00-10:00"}],
+  "tuesday": [],
+  "wednesday": [],
+  "thursday": [],
+  "friday": [],
+  "saturday": [],
+  "sunday": [{"subject": "Data Structures", "time": "09:00-10:00","activity":"goon"}]
+}
