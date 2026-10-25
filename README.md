@@ -1,6 +1,7 @@
 # Whatsapp schedule and task bot  
 Reads recent messages sent on any whatsapp chat, and manages tasks and schedules.  
-You can set up To-do lists, reminders and functions as a general chat bot.
+You can set up To-do lists, reminders and functions as a general chat bot.  
+Works when messaging yourself, or on other numbers and group chats.
 
 ## Requirements
 Uses the selenium library, installed with: __pip install selenium python-dotenv google-genai__  
