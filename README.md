@@ -13,11 +13,11 @@ __PHONE_NUMBER=911234567890__
 Requires Python 3.10 and Google chrome. 
 
 ## How to run it
-Open a virtual environment in terminal using: source venv/bin/activate (Recommended to download setup in venv)
-Generate an API Key through Google AI Studio (Please do not leak your API Keys)
-Make sure you have the selenium library installed
-Run python main.py
-Script can be stopped by entering ctrl+c on the terminal
+Open a virtual environment in terminal using: source venv/bin/activate (Recommended to download setup in venv)  
+Generate an API Key through Google AI Studio (Please do not leak your API Keys)  
+Make sure you have the selenium library installed  
+Run python main.py  
+Script can be stopped by entering ctrl+c on the terminal  
 
 
 ## Built with
