@@ -1,0 +1,20 @@
+# Whatsapp schedule and task bot  
+Reads recent messages sent on any whatsapp chat, and manages tasks and schedules.  
+You can set up To-do lists, reminders,
+
+## Requirements
+Uses the selenium library, installed with: __pip install selenium python-dotenv google-genai__  
+.env file to house your own API and phone number that starts with the country code(Should not be shared with anyone).  
+Example .env format:  
+__GEMINI_API_KEY=your_key__
+__MODEL_NAME=model name__
+__PHONE_NUMBER=911234567890__
+Requires Python 3.10 and Google chrome. 
+Run using __python main.py__
+
+## Built with
+Google genai and Gemma 4  
+Selenium  
+Whatsapp web  
+Anthropic Claude to help write code and debug
+
