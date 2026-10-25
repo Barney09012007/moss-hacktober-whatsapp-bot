@@ -9,7 +9,7 @@ def build_morning_message():
     if classes:
         lines.append("Classes today:")
         for c in classes:
-            lines.append(f"- {c['time']}  {c['subject']} {c['activity']}")
+            lines.append(f"- {c['time']}  {c['subject']} {c.get('activity', '')}".rstrip())
     else:
         lines.append("No classes today.")
 

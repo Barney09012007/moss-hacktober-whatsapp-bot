@@ -29,7 +29,7 @@ def handle(driver, text):
         send_message(driver, "\n".join(lines))
 
 
-BURST_LIMIT = 5  # more new messages than this in one poll = chat history loading, not real messages
+BURST_LIMIT = 5  
 
 
 def wait_for_history(driver, quiet_polls=3, max_wait=45):
@@ -65,7 +65,7 @@ def main():
         print("Sample id:", first[-1][0])
 
     now = datetime.now()
-    # if we start after today's send time, don't send a late morning message
+    
     last_morning = now.date() if (now.hour, now.minute) >= send_hm() else None
 
     while True:
@@ -73,7 +73,6 @@ def main():
             new = [(mid, text) for mid, text in read_messages_with_ids(driver)
                    if mid not in seen_ids]
             if len(new) > BURST_LIMIT:
-                # looks like old history rendering late (or scrolled in), not real new messages
                 print(f"Skipping {len(new)} messages that appeared at once (assumed old history).")
                 seen_ids.update(mid for mid, _ in new)
                 new = []
@@ -82,7 +81,6 @@ def main():
                 print("NEW:", text)
                 handle(driver, text)
 
-            # mark a reminder sent only after the message actually went out
             for idx, task in get_due_reminders():
                 send_message(driver, f"Reminder: {task}")
                 mark_reminder_sent(idx)

@@ -52,7 +52,6 @@ def apply_actions(actions):
             add_reminder(task, when)
             results.append(f"Reminder set: {task} at {dt.strftime('%I:%M %p, %d %b')}")
 
-        # keep the lookup fresh so "add X" then "done X" in one message works
         open_tasks = _open_map()
 
     return results

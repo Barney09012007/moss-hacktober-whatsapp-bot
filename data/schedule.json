@@ -5,5 +5,5 @@
   "thursday": [],
   "friday": [],
   "saturday": [],
-  "sunday": [{"subject": "Data Structures", "time": "09:00-10:00","activity":"goon"}]
+  "sunday": [{"subject": "Data Structures", "time": "09:00-10:00"}]
 }

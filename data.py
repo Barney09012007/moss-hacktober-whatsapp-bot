@@ -3,7 +3,6 @@ import json
 from datetime import datetime
 from config import DATA_DIR, SCHEDULE_FILE, TODOS_FILE, REMINDERS_FILE
 
-
 def _ensure_files():
     """Create the data folder and empty JSON files if they don't exist."""
     os.makedirs(DATA_DIR, exist_ok=True)
@@ -13,9 +12,7 @@ def _ensure_files():
             with open(path, "w") as f:
                 json.dump(default, f, indent=2)
 
-
 _ensure_files()
-
 
 def get_todays_classes():
     with open(SCHEDULE_FILE) as f:
@@ -23,13 +20,9 @@ def get_todays_classes():
     today = datetime.now().strftime("%A").lower()
     return schedule.get(today, [])
 
-
-# ---------- todos ----------
-
 def _load_todos():
     with open(TODOS_FILE) as f:
         return json.load(f)
-
 
 def _save_todos(todos):
     with open(TODOS_FILE, "w") as f:
@@ -38,7 +31,6 @@ def _save_todos(todos):
 
 def get_open_todos():
     return [t for t in _load_todos() if not t["done"]]
-
 
 def mark_todo_done(task_name):
     todos = _load_todos()
@@ -51,12 +43,10 @@ def mark_todo_done(task_name):
         _save_todos(todos)
     return found
 
-
 def add_todo(task_name):
     todos = _load_todos()
     todos.append({"task": task_name, "done": False})
     _save_todos(todos)
-
 
 def remove_todo(task_name):
     todos = _load_todos()
@@ -66,8 +56,6 @@ def remove_todo(task_name):
         return True
     return False
 
-
-# ---------- reminders ----------
 
 def _load_reminders():
     with open(REMINDERS_FILE) as f:
@@ -99,7 +87,7 @@ def get_due_reminders():
         try:
             when = datetime.strptime(r["when"], "%Y-%m-%d %H:%M")
         except (KeyError, ValueError):
-            continue  # skip a malformed entry instead of breaking the loop
+            continue  
         if when <= now:
             due.append((i, r["task"]))
     return due

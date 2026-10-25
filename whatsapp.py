@@ -14,7 +14,7 @@ MESSAGES = "div.copyable-text[data-pre-plain-text]"
 def open_whatsapp():
     options = Options()
     options.add_argument(f"--user-data-dir={CHROME_PROFILE_PATH}")
-    options.page_load_strategy = "eager"  # don't wait for every WhatsApp asset; we wait for the message box below
+    options.page_load_strategy = "eager"  
     driver = webdriver.Chrome(options=options)
     driver.get(f"https://web.whatsapp.com/send?phone={PHONE_NUMBER}")
 
@@ -32,8 +32,8 @@ def _bmp_only(text):
 def send_message(driver, text):
     box = driver.find_element(By.CSS_SELECTOR, MESSAGE_BOX)
     box.click()
-    # Every bot message starts with BOT_PREFIX so the bot can recognise (and ignore) its own messages.
-    full = _bmp_only(f"{BOT_PREFIX} {text}")
+    
+    full = _bmp_only(f"{BOT_PREFIX} {text}") #here you will know difference between bot and yourself
     lines = full.split("\n")
     for i, line in enumerate(lines):
         box.send_keys(line)
@@ -46,7 +46,6 @@ def read_messages(driver):
     return [text for _, text in read_messages_with_ids(driver)]
 
 
-# One browser round trip reads every message, instead of 3-4 round trips PER message.
 _READ_JS = """
 return Array.from(document.querySelectorAll(arguments[0])).map(function (el) {
   var row = el.closest('[data-id]');
@@ -56,13 +55,12 @@ return Array.from(document.querySelectorAll(arguments[0])).map(function (el) {
 });
 """
 
-
-def read_messages_with_ids(driver):
-    """Returns (message_id, text) for every message that doesn't start with the bot tag."""
+def read_messages_with_ids(driver): 
+    """Returns (message_id, text) for every message that doesn't start with the bot tag.""" #user message
     rows = driver.execute_script(_READ_JS, MESSAGES)
     out = []
     for msg_id, label, text in rows:
-        if not text or text.startswith(BOT_PREFIX):  # empty, or sent by the bot
+        if not text or text.startswith(BOT_PREFIX):  # empty or sent by the bot
             continue
         out.append((msg_id or label + text, text))
     return out

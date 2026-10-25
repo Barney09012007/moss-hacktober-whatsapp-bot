@@ -1,6 +1,5 @@
-2026/10/25-15:07:08.891 2b84 Reusing MANIFEST C:\Users\dylan\onedrive\desktop\projects\MOss-hackday\moss-hacktober-whatsapp-bot\chrome_profile\Default\Local Storage\leveldb/MANIFEST-000001
-2026/10/25-15:07:08.892 2b84 Recovering log #5
-2026/10/25-15:07:08.897 2b84 Reusing old log C:\Users\dylan\onedrive\desktop\projects\MOss-hackday\moss-hacktober-whatsapp-bot\chrome_profile\Default\Local Storage\leveldb/000005.log 
-2026/10/25-15:07:24.263 16b4 Level-0 table #9: started
-2026/10/25-15:07:24.272 16b4 Level-0 table #9: 13644 bytes OK
-2026/10/25-15:07:24.275 16b4 Delete type=0 #5
+2026/10/25-17:07:25.477 144e37a Reusing MANIFEST /Users/barney/whatsapp-reminder/chrome_profile/Default/Local Storage/leveldb/MANIFEST-000001
+2026/10/25-17:07:25.477 144e37a Recovering log #9
+2026/10/25-17:07:25.477 144e37a (ignoring error) /Users/barney/whatsapp-reminder/chrome_profile/Default/Local Storage/leveldb/000009.log: dropping 17636 bytes; Corruption: checksum mismatch
+2026/10/25-17:07:25.477 144e37a (ignoring error) /Users/barney/whatsapp-reminder/chrome_profile/Default/Local Storage/leveldb/000009.log: dropping 4541 bytes; Corruption: missing start of fragmented record(2)
+2026/10/25-17:07:25.478 144e37a Reusing old log /Users/barney/whatsapp-reminder/chrome_profile/Default/Local Storage/leveldb/000009.log 

@@ -37,6 +37,51 @@
   {
     "task": "One more reminder",
     "when": "2026-10-25 16:00",
+    "sent": true
+  },
+  {
+    "task": "wake up",
+    "when": "2026-10-25 15:21",
+    "sent": true
+  },
+  {
+    "task": "Tag @Hunaid every minute for the next 10 minutes",
+    "when": "2026-10-25 16:02",
+    "sent": true
+  },
+  {
+    "task": "Tag @Hunaid",
+    "when": "2026-10-25 16:02",
+    "sent": true
+  },
+  {
+    "task": "Tag @Hunaid",
+    "when": "2026-10-25 16:12",
+    "sent": true
+  },
+  {
+    "task": "Tag @Hunaid",
+    "when": "2026-10-25 16:22",
+    "sent": true
+  },
+  {
+    "task": "hackathon starting",
+    "when": "2026-10-25 16:43",
+    "sent": true
+  },
+  {
+    "task": "do leetcode",
+    "when": "2026-10-26 10:00",
     "sent": false
+  },
+  {
+    "task": "report",
+    "when": "2026-10-26 23:59",
+    "sent": false
+  },
+  {
+    "task": "reminder",
+    "when": "2026-10-25 17:03",
+    "sent": true
   }
 ]

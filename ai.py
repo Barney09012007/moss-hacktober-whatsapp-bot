@@ -12,10 +12,8 @@ load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 MODEL = os.getenv("MODEL_NAME")
 
-FENCE = "`" * 3  # three backticks, built this way so it can't get mangled when pasted
+FENCE = "`" * 3  
 
-# Fast config: JSON output, deterministic, and minimal "thinking". Gemini 3.x models think by
-# default (3.5 Flash defaults to MEDIUM), which adds seconds to a simple classification task.
 try:
     _FAST = types.GenerateContentConfig(
         response_mime_type="application/json",
